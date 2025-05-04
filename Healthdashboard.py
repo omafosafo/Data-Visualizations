@@ -50,7 +50,7 @@ with tabs[2]:
         st.write(f"Loaded file: {fl.name}")
 
     else:
-        default_path = r"C:\Users\user\Documents\Data Science Class\UofC\DATA 624\Assignment2\Public Health Surveillance.xlsx"
+        default_path = "Public Health Surveillance.xlsx"
         default_filename = r"Public Health Surveillance.xlsx"
         df = pd.read_excel(default_path)
         st.write(f"No file uploaded. Using default: {default_filename}")
