@@ -43,7 +43,7 @@ with tabs[1]:
 with tabs[2]:
     # Streamlit app layout
     #Read file
-    fl = st.file_uploader(" :file_folder: Upload a file", type=(["csv","xlsx"]))
+    fl = st.file_uploader(" :file_folder: Upload a file", type=(["csv","xlsx"]),disabled=True)
     #Handle no file exception:
     if fl is not None:
         df = pd.read_excel(fl, engine="openpyxl")
