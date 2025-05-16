@@ -85,18 +85,20 @@ with tabs[2]:
     analysis_methods = st.sidebar.multiselect('Select Analysis Method(s)', sorted(df_selected['Analysis Method #1'].dropna().unique()))
 
     # Filter data based on user selections
-    filtered_df = df_selected.copy()
-    if years:
-        filtered_df = filtered_df[filtered_df['Year of Publication'].isin(years)]
-    if countries:
-        filtered_df = filtered_df[filtered_df['Authors\'s country #1'].isin(countries)]
-    if health_events:
-        filtered_df = filtered_df[filtered_df['Health Event Under Surveillance'].isin(health_events)]
-    if platforms:
-        filtered_df = filtered_df[filtered_df['Platform #1'].isin(platforms)]
-    if analysis_methods:
-        filtered_df = filtered_df[filtered_df['Analysis Method #1'].isin(analysis_methods)]
-    
+    try:
+        if years:
+            filtered_df = filtered_df[filtered_df['Year of Publication'].isin(years)]
+        if countries:
+            filtered_df = filtered_df[filtered_df['Authors\'s country #1'].isin(countries)]
+        if health_events:
+            filtered_df = filtered_df[filtered_df['Health Event Under Surveillance'].isin(health_events)]
+        if platforms:
+            filtered_df = filtered_df[filtered_df['Platform #1'].isin(platforms)]
+        if analysis_methods:
+            filtered_df = filtered_df[filtered_df['Analysis Method #1'].isin(analysis_methods)]
+    except KeyError as e:
+        st.error(f"Filter error: {e}. No data for selected filters.")
+        filtered_df = pd.DataFrame()  # Empty dataframe to avoid downstream errors   
 
     # Display total studies count
     view1,view2,view3,view4= st.columns([0.25,0.25,0.25,0.25]) # For displaying metric cards
