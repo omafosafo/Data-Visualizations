@@ -102,7 +102,7 @@ with tabs[2]:
 
     # Display total studies count
     view1,view2,view3,view4= st.columns([0.25,0.25,0.25,0.25]) # For displaying metric cards
-    if filtered_df is not None and not filtered_df.empty:
+    if not filtered_df.empty:
         total_rows = len(filtered_df)
         with view1:
             st.metric(label="Total Studies Matching Filters", value=total_rows)
