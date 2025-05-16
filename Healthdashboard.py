@@ -102,27 +102,27 @@ with tabs[2]:
 
     # Display total studies count
     view1,view2,view3,view4= st.columns([0.25,0.25,0.25,0.25]) # For displaying metric cards
-    
-    total_rows = len(filtered_df)
-    with view1:
-        st.metric(label="Total Studies Matching Filters", value=total_rows)
-    health_event_counts = filtered_df['Health Event Under Surveillance'].value_counts().sum()
-    with view2:
-        st.metric(label="Total Surveillance",value=health_event_counts)
-    most_used_platform = filtered_df['Platform #1'].value_counts().idxmax()
-    most_used_platform_count=filtered_df['Platform #1'].value_counts().max()
-    with view3:
-        st.metric(label="Most used platform",value=most_used_platform)
-    with view4:
-        st.metric(label="Coount of most used",value=most_used_platform_count)
-    st.divider()
-    # Visualization: Count of studies per platform
-    col1,col2 = st.columns([0.5,0.5])
-    col3,col4 = st.columns([0.5,0.5])
-    col5,col6 = st.columns([0.5,0.5]) # Yuhan charts
-    col7,col8 = st.columns([0.5,0.5]) # Clair charts
+   if filtered_df is not None and not filtered_df.empty:
+        total_rows = len(filtered_df)
+        with view1:
+            st.metric(label="Total Studies Matching Filters", value=total_rows)
+        health_event_counts = filtered_df['Health Event Under Surveillance'].value_counts().sum()
+        with view2:
+            st.metric(label="Total Surveillance",value=health_event_counts)
+        most_used_platform = filtered_df['Platform #1'].value_counts().idxmax()
+        most_used_platform_count=filtered_df['Platform #1'].value_counts().max()
+        with view3:
+            st.metric(label="Most used platform",value=most_used_platform)
+        with view4:
+            st.metric(label="Coount of most used",value=most_used_platform_count)
+        st.divider()
+        # Visualization: Count of studies per platform
+        col1,col2 = st.columns([0.5,0.5])
+        col3,col4 = st.columns([0.5,0.5])
+        col5,col6 = st.columns([0.5,0.5]) # Yuhan charts
+        col7,col8 = st.columns([0.5,0.5]) # Clair charts
 
-    if not filtered_df.empty:
+    
         platforms_count = filtered_df['Platform #1'].value_counts().reset_index()
         platforms_count.columns = ['Platform', 'Number of Studies']
         # Comparative Analysis: Count of studies per country
